@@ -1,33 +1,26 @@
-const fs = require("fs").promises;
-const path = require("path");
+const fs = require("fs")
+const path = require("path")
 
-const filePath = path.join(__dirname, "notes", "javohir.txt")
+// fs.mkdir(path.join(__dirname, "htmls"), err=>{
+//     if(err) throw new Error();
 
-// fs.mkdir(path.join(__dirname, "templates"), err => {
-//     if (err) throw new Error()
-//     console.log("Tayyorlandi Template")
+//     console.log("fay yaratildi")
 // })
 
-// fs.mkdir(path.join(__dirname, "notes"), err => {
-//     if (err) throw new Error()
+fs.writeFile(path.join(__dirname, "htmls", "suvonov.txt"), "salom dunyo", err=>{
+    // console.log(err)
+    if(err) throw new Error()
+        console.log("txt fayl yaratildi")
 
-//     console.log("Notes Tayoorlandi")
-// })
+    fs.appendFile(path.join(__dirname, "htmls", "suvonov.txt"), " salom node js ", err=>{
+        if(err) throw new Error();
 
-async function procresFunction(){
-    try{
-        await fs.writeFile(filePath, "Suvonov Javohir");
-        console.log("papka yaratildi va text yozildi ");
+        console.log("o'zgartirildi")
+        fs.readFile(path.join(__dirname, "htmls", "suvonov.txt"), "utf-8", (err, data)=>{
+            if(err) throw new Error();
 
-        await fs.appendFile(filePath, " ALimardon O'g'li");
-        console.log("Txt o'zgartirildi")
+            console.log(data)
+        })
+    })
+})
 
-        const data = await fs.readFile(filePath, "utf-8");
-        console.log(data)
-    }
-    catch(err){
-        console.log(err)
-    }
-}
-
-procresFunction();
