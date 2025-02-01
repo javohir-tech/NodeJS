@@ -1,26 +1,20 @@
-const fs = require("fs")
-const path = require("path")
+const fs = require("fs").promises;
+const path = require("path");
 
-// fs.mkdir(path.join(__dirname, "htmls"), err=>{
-//     if(err) throw new Error();
+const filePath = path.join(__dirname, "notes", "javohir.txt")
 
-//     console.log("fay yaratildi")
-// })
+async function myFunction(){
+    try {
+        await fs.appendFile(filePath, "salom dunyo")
+        console.log("muvafaqiyyatli  o'zgartirildi ")
 
-fs.writeFile(path.join(__dirname, "htmls", "suvonov.txt"), "salom dunyo", err=>{
-    // console.log(err)
-    if(err) throw new Error()
-        console.log("txt fayl yaratildi")
+        const data = await fs.readFile(filePath, "utf-8")
+        console.log(data)
+    }
+    catch(err){
+        console.log(err)
+        throw new Error("Xatolik vyu vyu")
+    }
+}
 
-    fs.appendFile(path.join(__dirname, "htmls", "suvonov.txt"), " salom node js ", err=>{
-        if(err) throw new Error();
-
-        console.log("o'zgartirildi")
-        fs.readFile(path.join(__dirname, "htmls", "suvonov.txt"), "utf-8", (err, data)=>{
-            if(err) throw new Error();
-
-            console.log(data)
-        })
-    })
-})
-
+myFunction()
