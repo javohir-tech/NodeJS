@@ -1,33 +1,33 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const path = require("path");
+
+const filePath = path.join(__dirname, "notes", "javohir.txt")
 
 // fs.mkdir(path.join(__dirname, "templates"), err => {
 //     if (err) throw new Error()
-//     console.log("file was created succesfuly")
+//     console.log("Tayyorlandi Template")
 // })
 
 // fs.mkdir(path.join(__dirname, "notes"), err => {
-//     if (err) throw new Error();
+//     if (err) throw new Error()
 
-//     console.log("notes yaratildi")
+//     console.log("Notes Tayoorlandi")
 // })
 
-fs.writeFile(path.join(__dirname, "notes", "javohir.txt"), "Suvonov Javohir", err => {
-    if (err) throw new Error;
+async function procresFunction(){
+    try{
+        await fs.writeFile(filePath, "Suvonov Javohir");
+        console.log("papka yaratildi va text yozildi ");
 
-    console.log("papka yartildi va text yozildi ")
+        await fs.appendFile(filePath, " ALimardon O'g'li");
+        console.log("Txt o'zgartirildi")
 
-    fs.appendFile(path.join(__dirname, "notes", "javohir.txt"), " Alimardon o'g'li ", err => {
-        if (err) throw new Error()
+        const data = await fs.readFile(filePath, "utf-8");
+        console.log(data)
+    }
+    catch(err){
+        console.log(err)
+    }
+}
 
-        console.log("o'zgartirish kiritildi")
-        fs.readFile(path.join(__dirname, "notes", "javohir.txt"), "utf-8", (err, data) => {
-            if (err) throw new Error()
-            console.log(data)
-        })
-
-    })
-
-})
-
-
+procresFunction();
