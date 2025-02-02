@@ -1,14 +1,33 @@
-const Events = require("events")
+const fs = require("fs")
+const path = require("path")
 
-class Logger extends Events {
-    log(a, b) {
-        this.emit("canculate", a + b)
+// fs.mkdir(path.join(__dirname, "Style"),err=>{
+//     if(err){
+//         console.log(err)
+//         throw new Error("xatolik")
+//     }
+//     console.log("palka yaratildi")
+// })
+
+const filePath = path.join(__dirname, "Style", "Suvonov.txt")
+
+fs.writeFile(path.join(filePath), "salom dunyo", err=>{
+    if(err){
+        console.log(err)
+        throw new Error("Xatolik")
     }
-}
+    console.log("yaratildi va text qo'shildi")  
 
-const logger = new Logger()
-logger.on("canculate", data=>{
-    console.log(data)
+    fs.appendFile(filePath, " hayr dunyo", err=>{
+        if(err) throw new Error("xatolik o'zgartirishda")
+            console.log("o'zgartirildi")
+
+        fs.readFile(filePath, "utf-8", (err, data)=>{
+            if(err){
+                throw  new Error("oqishda muammo")
+            }
+            console.log(data)
+        })
+    })
 })
 
-logger.log(12, 12)
