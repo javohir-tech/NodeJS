@@ -1,14 +1,12 @@
 const http = require("http");
 
 const server = http.createServer((request, response)=>{
-    //request - sorov
-    //response - javob
     console.log(request.url)
 
-    response.write('<h1 style="color:"red">Salom Dunyo</>')
+    response.write("<h1>Salom Dunyo</h1>")
     response.end()
 })
 
-server.listen(3000, ()=>{
-    console.log("Server has been started on port : 3000")
+server.listen(2700, ()=>{
+    console.log("Server has been started port : 2700")
 })
