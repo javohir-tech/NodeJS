@@ -1,12 +1,14 @@
-const carData = require('./car')
-const userData = require('./user')
+const http = require("http");
 
-console.log(carData.car)
-carData.carLogger()
-console.log(userData.user)
-userData.userLogger()
+const server = http.createServer((request, response)=>{
+    //request - sorov
+    //response - javob
+    console.log(request.url)
 
-console.log(__dirname)
-console.log(__filename)
+    response.write('<h1 style="color:"red">Salom Dunyo</>')
+    response.end()
+})
 
-// const data = require()
+server.listen(3000, ()=>{
+    console.log("Server has been started on port : 3000")
+})
