@@ -23,18 +23,23 @@ const server = http.createServer((req, res) => {
             })
         }
     } else if (req.method === "POST") {
-        res.writeHead(200, { "Content-Type": "text/html, chaarset='utf-8'" })
+        // res.writeHead(200, { "Content-Type": "text/html, chaarset='utf-8'" })
 
-        const body = []
+        // const body = []
 
-        req.on("data", data => {
-            body.push(Buffer.from(data))
-            console.log(body.toString())
-        })
+        // req.on("data", data => {
+        //     body.push(Buffer.from(data))
+        //     console.log(body.toString())
+        // })
 
-        req.on("end", () => {
-            const message = body.toString().split("=")[1]
-            res.end(`salom foydalanuvchi ${message}`)
+        // req.on("end", () => {
+        //     const message = body.toString().split("=")[1]
+        //     res.end(`salom foydalanuvchi ${message}`)
+        // })
+
+        fs.readFile(path.join(__dirname, "Templates", "auth.html"), "utf-8", (err, data)=>{
+            if(err) throw  new Error(err)
+                res.end(data)
         })
 
     }
