@@ -21,6 +21,14 @@ const server = http.createServer((req, res) => {
                 if (err) throw new Error(err)
                 res.end(data)
             })
+        } else if (req.url === "/api/admin") {
+            res.writeHead(200, { "Content-Type": "text/json" })
+            const admin = {
+                name: "Javohir",
+                surname: "Suvonov",
+                age: 20
+            }
+            res.end(JSON.stringify(admin))
         }
     } else if (req.method === "POST") {
         // res.writeHead(200, { "Content-Type": "text/html, chaarset='utf-8'" })
@@ -37,9 +45,9 @@ const server = http.createServer((req, res) => {
         //     res.end(`salom foydalanuvchi ${message}`)
         // })
 
-        fs.readFile(path.join(__dirname, "Templates", "auth.html"), "utf-8", (err, data)=>{
-            if(err) throw  new Error(err)
-                res.end(data)
+        fs.readFile(path.join(__dirname, "Templates", "auth.html"), "utf-8", (err, data) => {
+            if (err) throw new Error(err)
+            res.end(data)
         })
 
     }
